@@ -1,0 +1,83 @@
+---
+title: "Linear model I Data Practical 8"
+author: "Raphaël Krieg"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message= F , warning= F}
+library(readr)
+library(dslabs)
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+```
+
+## Loading a dataset (Reading a .csv file)
+
+```{r}
+data_wine <- read_csv("https://raw.githubusercontent.com/aniruddhachoudhury/Red-Wine-Quality/master/winequality-red.csv")
+```
+
+```{r}
+str(data_wine)
+```
+
+## Data analysis
+
+I want to know the best predictor for the quality of the wine. Explanatory variables could be any of the above projected onto the quality variable.
+
+```{r}
+cor.test(data_wine$`fixed acidity`, data_wine$quality)
+```
+
+```{r}
+cor.test(data_wine$`volatile acidity`, data_wine$quality)
+```
+
+```{r}
+cor.test(data_wine$`citric acid`, data_wine$quality)
+cor.test(data_wine$`residual sugar`, data_wine$quality)
+cor.test(data_wine$chlorides, data_wine$quality)
+cor.test(data_wine$`free sulfur dioxide`, data_wine$quality)
+cor.test(data_wine$`total sulfur dioxide`, data_wine$quality)
+cor.test(data_wine$density, data_wine$quality)
+cor.test(data_wine$pH, data_wine$quality)
+cor.test(data_wine$sulphates, data_wine$quality)
+cor.test(data_wine$alcohol, data_wine$quality)
+cor.test(data_wine$quality, data_wine$quality)
+```
+## Best positive predictor
+
+Alcohol seems to be the best predictor of a high rating with a positive correlation of **0.4761663**
+
+## Best negative predictor
+
+Volatile acidity seems to negatively correlate (**-0.3905578**) with the rating of a wine. The less there is, the higher the rating will be. It's quite logic in fact, nobody want an unstable wine that could be acidic.
+
+```{r}
+general<-lm(data_wine$alcohol ~ data_wine$quality)
+summary(general)
+```
+## Correlation doesn't mean causation
+
+Generally speaking, correlation doesn't mean causation. In our case, the alcohol rate could actually cause the higher ratings because I cannot imagine a relation going on the opposite side (E.g ratings cannot influence the alcohol rate in a specific bottle).
+
+```{r}
+ggplot(data_wine,aes(alcohol, quality, color=alcohol)) +
+    geom_point()+
+    geom_smooth(method = "lm", se = TRUE,color="black")
+```
+# Important remark
+
+Even though the correlation was strong between the alcohol rate and the ratings, the graph above shows very clearly that the regression line fits very poorly the various data points. We can firmly say that there is absolutely no causation between the two variables and that the correlation between them is very artificial. In order to truly understand what makes a good Wine, we need to investigate further ahead.
+
+# References
+
+Chodhury, A. (2022). Red-Wine-Quality [Jupyter Notebook]. https://github.com/aniruddhachoudhury/Red-Wine-Quality/blob/6956eb70b1d1d89486055f09001903882a554d31/winequality-red.csv (Original work published 2018)
