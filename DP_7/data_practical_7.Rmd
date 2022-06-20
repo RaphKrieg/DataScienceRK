@@ -1,0 +1,52 @@
+---
+title: "Data Modeling Data Practical 7"
+author: "Raphaël Krieg"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message= F , warning= F}
+library(readr)
+library(dslabs)
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+```
+
+# I'm a Star Wars fan !
+### Description of the dataset
+
+This dataset is composed of several variables. See below for more information about them (I' won't describe them all :)
+```{r}
+starwars1 <- na.omit(starwars)
+starwars1
+```
+
+
+
+```{r}
+ggplot(starwars1, aes(y=eye_color))+
+  geom_bar(aes(fill=homeworld))+  
+  theme(axis.text.y = element_text(angle = 360, vjust = 0.3, hjust=1,size=6))
+```
+## Hypothesis formulation 
+
+H1: Planet origin has an impact on the color of your eyes.
+Ho: Color of eyes is not influenced by the planet origin.
+
+## Statistical test
+
+```{r}
+chisq.test(table(starwars1$homeworld,starwars1$eye_color))
+```
+We cannot reject HO meaning that the homeworld seem to dictate which color will be your eyes.
+
+# References
+
+Starwars characters—Starwars. (n.d.). Retrieved June 21, 2022, from https://dplyr.tidyverse.org/reference/starwars.html
