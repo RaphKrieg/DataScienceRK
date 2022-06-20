@@ -1,0 +1,54 @@
+---
+title: "Data Visualization II Data Practical 6"
+author: "Raphaël Krieg"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message= F , warning= F}
+library(readr)
+library(dslabs)
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+```
+
+Let's have a look at the `cars` dataframe.
+```{r}
+str(cars)
+
+```
+
+```{r}
+summary(cars)
+```
+
+## Description of the data
+The dataset `cars` is small and composed of two variables. The *speed* and *the distance required to reach 0 km/h when using the breaks.*It's composed of 50 Observations. Variables seems to be **quantitative and discrete.**
+
+## Question: Does the speed increases the distance required to stop? 
+
+H1: Higher speed require higher distance.
+Ho: Speed doesn't influence the stopping distance.
+
+```{r}
+ggplot(cars, aes(speed, dist))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+We can see a strong correlation backing the hypothesis (H1) formulated above.The higher the speed, the longer the distance will be to fully stop the car.
+
+## Question: Why do we have outliers?
+
+The plot shows some outliers. Ex. For the same speed, the distance could differ. The researchers could look for confounding variables, like the type of tires, if the road was wet or not,etc. The ggplot shows thoses outliers which residuals are significantly away from the regression line. 
+
+# References
+
+McNeil, D. R. (1977) Interactive Data Analysis. Wiley.
