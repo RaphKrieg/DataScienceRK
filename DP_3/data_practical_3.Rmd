@@ -1,0 +1,77 @@
+---
+title: "Data Data Practical 3"
+author: "Raphaël Krieg"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(knitr)
+library(dplyr)
+library(readr)
+library(dslabs)
+```
+
+
+### Dataset 1 - Built-in R dataset
+
+In the following code-chunk, I load the built-in R dataset called "trees"
+
+```{r}
+data(trees)
+str(trees)
+```
+
+
+We can see that there are 3 **numerical** variables: 
+1. [Girth](https://en.wikipedia.org/wiki/Tree_girth_measurement) 
+2. [Heigth](https://en.wikipedia.org/wiki/Tree_height_measurement) 
+3. [Volume](https://en.wikipedia.org/wiki/Tree_volume_measurement)
+
+These three variables are **quantitve and continuous**
+
+
+### Dataset 2 - The Pudding Dataset
+
+Here we have a fun exemple of the `mars_weather` dataset. For more information about the different variables please follow this [link](https://data.world/the-pudding/mars-weather)
+
+```{r}
+mars_weather <- read.csv("https://raw.githubusercontent.com/the-pudding/data/master/mars-weather/mars-weather.csv")
+str(mars_weather)
+```
+
+This dataset includes **10 variables**
+
+1. *id* Type: Number. **Quantitative and disrcete**
+2. *terrestrial_date* Type: Date. **Qualitative and ordinal**
+3. *sol* Type: Number. **Quantitative and discrete**
+4. *Ls* Type: Number. **Quantitative and discrete**
+5. *month* Type: Text. **Qualitative and ordinal**
+6. *min_temp* Type: Number. **Quantitative and continuous**
+7. *max_temp* Type: Number. **Quantitative and continuous**
+8. *pressure* Type: Number. **Quantitative and continuous**
+9. *wind_speed* Type: Number. **Quantitative and continuous**
+10. *atmo_opacity* Type: Text. **Qualitative and nominal**
+
+
+### Dataset 3 - The Dplyr Dataset
+
+The next dataset is recovered from the extended built-in Datasets from R via the dplyr package.
+
+[Information](https://search.r-project.org/CRAN/refmans/FlexDir/html/oliveoil.html) about the dataset `olive`.
+
+```{r}
+str(olive)
+```
+
+This dataset has **10 variables**
+
+1. *region* Type: Factor **Qualitative and discrete**
+2. *area* Type: Factor.**Qualitative and discrete**
+3. to 10. Are chemicals values. **Quantitatives and continuous**
