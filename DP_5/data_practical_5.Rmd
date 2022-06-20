@@ -1,0 +1,70 @@
+---
+title: " Data Visualization I Data Practical 5"
+author: "Raphaël Krieg"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message= F , warning= F}
+library(readr)
+library(dslabs)
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+```
+
+## Dataset description and modification wide into long.
+
+I chose the `divorce_margarine` dataset. We have the *divorce rate in the state of Maine* in the U.S and the *consumption of margarine per capita*. Both are **numeric** and **continuous**. The last variable is the *year*, a **quantitative discrete** variable.
+```{r}
+str(divorce_margarine)
+names(divorce_margarine)[1] <-'Divorce'
+names(divorce_margarine)[2] <-'Margarine'
+names(divorce_margarine)[3] <-'Year'
+df_wide <- data.frame(divorce_margarine)
+df_wide %>% kable()
+```
+
+
+
+```{r}
+str(divorce_margarine)
+names(divorce_margarine)[1] <-'Divorce'
+names(divorce_margarine)[2] <-'Margarine'
+names(divorce_margarine)[3] <-'Year'
+data_long <- gather(divorce_margarine, condition, measurement, Divorce:Year, factor_key=TRUE)
+data_long %>% kable()
+```
+
+## Data visualization via ggplot.
+
+```{r}
+ggplot(divorce_margarine, aes(Divorce, Margarine)) + 
+  geom_line (colour = "grey50") + 
+  geom_point(aes(colour = Margarine))
+```
+
+## Uniting
+
+```{r}
+united_marga_divo <- divorce_margarine %>% unite(unified)
+head(united_marga_divo) %>% kable()
+```
+
+
+## Separating
+
+```{r}
+separate_marga_divo <- united_marga_divo %>% separate(unified, into=c("Divorce","Margarine", "year"), sep="_")
+head(separate_marga_divo) %>% kable()
+```
+
+# References
+
+divorce_margarine function—RDocumentation. (n.d.). Retrieved June 20, 2022, from https://www.rdocumentation.org/packages/dslabs/versions/0.7.4/topics/divorce_margarine
