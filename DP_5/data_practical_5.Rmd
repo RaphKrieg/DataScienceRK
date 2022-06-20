@@ -49,6 +49,7 @@ ggplot(divorce_margarine, aes(Divorce, Margarine)) +
   geom_line (colour = "grey50") + 
   geom_point(aes(colour = Margarine))
 ```
+C.f the DP_5 to find the image (I couldn't find a way to show it here)
 
 ## Uniting
 
