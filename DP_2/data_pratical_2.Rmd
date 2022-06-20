@@ -1,0 +1,61 @@
+---
+title: "Scientific Report Data Practical 2"
+author: "Raphaël Krieg"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  github_document:
+    toc: true
+bibliography: citat.bib
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r message=FALSE, warning=FALSE}
+library(knitr)
+library(dplyr)
+```
+
+ 
+# Storytelling
+
+I will have the great opportunity to go to Norway the next semester in order to study what role sorytelling has on the transmission of culture. 
+
+Storytelling is everywhere and seems to be directly tied to the human capacity to speak. From an evolution perspective, the art of storytelling seems unadaptative at first glance. However, many studies start to investigate the adaptative purpose of storytelling and its role in our survival.
+
+
+### A non exhaustive list of important questions storytelling asks
+
+
+1. Storytelling seems to be closely related to the ability of *imagination* and its tendency to develop very early in children.
+
+2. According do Lisa @cron_wired_2012, our brain is litterly **wired** to enjoy stories. It craves for surpises and compelling plot devices.
+
+3. What is the purpose of stories? Why is it so important? How entire economic *monsters* (like Disney) feeds on our needs to watch, hear and take part in epic adventures along side heroes?
+
+
+## The book of imagination
+
+```{r, echo=FALSE, fig.cap="Entire Worlds exist on paper", out.width = '100%'}
+knitr::include_graphics("Image_book.jpg")
+```
+
+
+# How to load a DataSet ?
+
+It's easy to add so Code chunks and DataSets
+
+```{r}
+data(discoveries)
+str(discoveries)
+glimpse(discoveries)
+discoveries
+```
+
+
+# References
+
+McNeil, D. R. (1977) Interactive Data Analysis. Wiley.
